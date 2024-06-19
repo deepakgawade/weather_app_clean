@@ -7,7 +7,7 @@ import 'package:weather_clean/data/failure.dart';
 import 'package:weather_clean/domain/entities/country.dart';
 import 'package:weather_clean/domain/repositories/country_repository.dart';
 
-class CountryRepositoryImpl extends WeatherRepository{
+class CountryRepositoryImpl extends CountryRepository{
   final RemoteDataSouces remoteDataSouces;
 
   CountryRepositoryImpl({required this.remoteDataSouces});

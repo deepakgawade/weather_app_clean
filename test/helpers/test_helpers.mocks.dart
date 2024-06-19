@@ -91,11 +91,11 @@ class _FakeResponse_5<T1> extends _i1.SmartFake implements _i7.Response<T1> {
         );
 }
 
-/// A class which mocks [WeatherRepository].
+/// A class which mocks [CountryRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWeatherRepository extends _i1.Mock implements _i8.WeatherRepository {
-  MockWeatherRepository() {
+class MockCountryRepository extends _i1.Mock implements _i8.CountryRepository {
+  MockCountryRepository() {
     _i1.throwOnMissingStub(this);
   }
 

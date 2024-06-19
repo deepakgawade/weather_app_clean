@@ -7,8 +7,9 @@ part of 'weather_model.dart';
 // **************************************************************************
 
 CountryModel _$CountryModelFromJson(Map<String, dynamic> json) => CountryModel(
+      population: json['population'] as int,
       name: NameModel.fromJson(json['name'] as Map<String, dynamic>),
-      currencies: json['currencies'],
+      currencies: json['currencies'] as Map<String, dynamic>,
       capital:
           (json['capital'] as List<dynamic>).map((e) => e as String).toList(),
       region: json['region'] as String,
@@ -34,6 +35,7 @@ Map<String, dynamic> _$CountryModelToJson(CountryModel instance) =>
       'area': instance.area,
       'maps': instance.maps,
       'continents': instance.continents,
+      'population': instance.population,
       'flags': instance.flags,
       'capitalInfo': instance.capitalInfo,
     };
@@ -65,8 +67,9 @@ Map<String, dynamic> _$FlagsToJson(Flags instance) => <String, dynamic>{
     };
 
 Capital _$CapitalFromJson(Map<String, dynamic> json) => Capital(
-      latlng:
-          (json['latlng'] as List<dynamic>).map((e) => e as String).toList(),
+      latlng: (json['latlng'] as List<dynamic>)
+          .map((e) => (e as num).toDouble())
+          .toList(),
     );
 
 Map<String, dynamic> _$CapitalToJson(Capital instance) => <String, dynamic>{

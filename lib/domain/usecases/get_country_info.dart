@@ -4,10 +4,10 @@ import 'package:weather_clean/domain/repositories/country_repository.dart';
 
 import '../../data/failure.dart';
 
-class GetCurrentWeather{
-  final WeatherRepository weatherRepository;
+class GetCountryInfomation{
+  final CountryRepository weatherRepository;
 
-  GetCurrentWeather({required this.weatherRepository});
+  GetCountryInfomation({required this.weatherRepository});
 
 
   Future<Either<Failure,Country>> execute(String cityName){

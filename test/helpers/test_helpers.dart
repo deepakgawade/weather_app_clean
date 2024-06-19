@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:weather_clean/domain/repositories/country_repository.dart';
 
 @GenerateMocks([
-  WeatherRepository,
+  CountryRepository,
 ], customMocks: [
   MockSpec<Dio>(as: #MockDio)
 ])

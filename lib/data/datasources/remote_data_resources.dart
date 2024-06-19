@@ -17,13 +17,14 @@ class GeCountryInfo extends RemoteDataSouces{
   Future<CountryModel> getCountryInfo(String country) async {
     try {
           final  result = await dio.get('https://restcountries.com/v3.1/name/$country');
-   
-           final countyData = CountryModel.fromJson(result.data);
+   print(result.data[0]);
+           final countyData = CountryModel.fromJson(result.data[0]);
              return countyData;
     
    
       
     } catch (e) {
+      print(e);
       rethrow ;
     }
 

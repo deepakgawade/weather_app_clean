@@ -7,4 +7,14 @@ sealed class CountryState extends Equatable {
   List<Object> get props => [];
 }
 
-final class CountryInitial extends CountryState {}
+final class CountryInitialState extends CountryState {}
+final class CountryLoadedState extends CountryState {
+  final Country county;
+
+ const CountryLoadedState({required this.county});
+
+
+
+}
+final class CountryFailureState extends CountryState {}
+final class CountryLoadingState extends CountryState {}

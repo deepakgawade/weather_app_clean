@@ -6,23 +6,24 @@ part 'weather_model.g.dart';
 
 @JsonSerializable()
 class CountryModel extends Equatable{
- const  CountryModel({required this.name, required this.currencies, required this.capital, required this.region, required this.borders, required this.area, required this.maps, required this.continents, required this.flags, required this.capitalInfo});
+ const  CountryModel({required this.population,required this.name, required this.currencies, required this.capital, required this.region, required this.borders, required this.area, required this.maps, required this.continents, required this.flags, required this.capitalInfo});
 
 
 
 
 
   @override
-  List<Object?> get props => [name,currencies,capital,region,borders,area,maps,continents,flags,capitalInfo];
+  List<Object?> get props => [name,currencies,capital,region,borders,area,maps,continents,flags,capitalInfo,population];
 
   final NameModel name;
-  final dynamic currencies;
+  final Map<String, dynamic> currencies;
   final List<String> capital;
   final String region;
   final List<String> borders;
   final double area;
   final Maps maps;
   final List<String> continents;
+  final int population;
 
   final Flags flags; 
   final Capital capitalInfo;
@@ -32,7 +33,7 @@ class CountryModel extends Equatable{
 
   
   Country toEntity(){
-    return Country(name: name.official, common: name.common, currencies: currencies, capital: capital.first, capitalLocation: '', countryLocation: maps.googleMaps, borders: borders, area: area, population: 0, flags:[ flags.png], coatOfArms: '');
+    return Country(name: name.official, common: name.common, currencies: currencies.toString(), capital: capital.first, capitalLocation: '', countryLocation: maps.googleMaps, borders: borders, area: area, population: population, flags:[ flags.png], coatOfArms: '');
   }
 
 
@@ -90,7 +91,7 @@ class Flags extends Equatable{
 @JsonSerializable()
 class Capital extends Equatable{
 
-  final List<String> latlng;
+  final List<double> latlng;
  
 
       factory Capital.fromJson(Map<String, dynamic> json) =>
