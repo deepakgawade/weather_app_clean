@@ -1,17 +1,12 @@
-# weather_clean
+# Weather Application
 
-A new Flutter project.
+This is a Flutter application that allows users to search for weather information for a city. The app is built using a clean architecture and the BLoC pattern for state management.
 
-## Getting Started
+## Class Diagram
 
-This project is a starting point for a Flutter application.
+![Class Diagram](http://www.plantuml.com/plantuml/png/%40startuml%0Aclass%20Weather%20%7B%0A%20%20%2BString%20cityName%0A%20%20%2Bdouble%20temperature%0A%20%20%2BString%20description%0A%20%20%2BString%20icon%0A%7D%0A%0Aclass%20GetWeather%20%7B%0A%20%20%2BWeatherRepository%20repository%0A%20%20%2Bexecute%28String%20cityName%29%0A%7D%0A%0Aabstract%20class%20WeatherRepository%20%7B%0A%20%20%2BgetWeather%28String%20cityName%29%0A%7D%0A%0Aclass%20WeatherRepositoryImpl%20%7B%0A%20%20%2BRemoteDataSource%20remoteDataSource%0A%20%20%2BgetWeather%28String%20cityName%29%0A%7D%0A%0Aabstract%20class%20RemoteDataSource%20%7B%0A%20%20%2BgetWeather%28String%20cityName%29%0A%7D%0A%0Aclass%20RemoteDataSourceImpl%20%7B%0A%20%20%2Bhttp.Client%20client%0A%20%20%2BgetWeather%28String%20cityName%29%0A%7D%0A%0Aclass%20WeatherModel%20%7B%0A%20%20%2BfromJson%28%29%0A%7D%0A%0AWeather%20%3C%7C--%20WeatherModel%0AWeatherRepository%20%3C%7C..%20WeatherRepositoryImpl%0ARemoteDataSource%20%3C%7C..%20RemoteDataSourceImpl%0AGetWeather%20--%3E%20WeatherRepository%0AWeatherRepositoryImpl%20--%3E%20RemoteDataSource%0A%40enduml)
 
-A few resources to get you started if this is your first Flutter project:
+## Flow Diagram
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Flow Diagram](http://www.plantuml.com/plantuml/png/%40startuml%0Aactor%20User%0Aparticipant%20%22UI%20%28View%29%22%20as%20View%0Aparticipant%20%22WeatherBloc%22%20as%20Bloc%0Aparticipant%20%22GetWeather%20%28Usecase%29%22%20as%20Usecase%0Aparticipant%20%22WeatherRepository%22%20as%20Repository%0Aparticipant%20%22RemoteDataSource%22%20as%20DataSource%0Adatabase%20%22Weather%20API%22%20as%20API%0A%0AUser%20-%3E%20View%3A%20Enters%20city%20name%20and%20taps%20search%0AView%20-%3E%20Bloc%3A%20Add%20GetWeatherEvent%0ABloc%20-%3E%20Usecase%3A%20execute%28cityName%29%0AUsecase%20-%3E%20Repository%3A%20getWeather%28cityName%29%0ARepository%20-%3E%20DataSource%3A%20getWeather%28cityName%29%0ADataSource%20-%3E%20API%3A%20GET%20request%0AAPI%20--%3E%20DataSource%3A%20JSON%20response%0ADataSource%20--%3E%20Repository%3A%20WeatherModel%0ARepository%20--%3E%20Usecase%3A%20Weather%20Entity%0AUsecase%20--%3E%20Bloc%3A%20Either%3CFailure%2C%20Weather%3E%0ABloc%20-%3E%20Bloc%3A%20Emits%20WeatherLoaded%20or%20WeatherError%20state%0ABloc%20--%3E%20View%3A%20New%20State%0AView%20-%3E%20View%3A%20Rebuilds%20UI%20with%20data%20or%20error%0AView%20--%3E%20User%3A%20Displays%20weather%20information%20or%20error%20message%0A%40enduml)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# weather_app_clean

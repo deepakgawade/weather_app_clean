@@ -1,0 +1,24 @@
+@startuml
+actor User
+participant "UI (View)" as View
+participant "WeatherBloc" as Bloc
+participant "GetWeather (Usecase)" as Usecase
+participant "WeatherRepository" as Repository
+participant "RemoteDataSource" as DataSource
+database "Weather API" as API
+
+User -> View: Enters city name and taps search
+View -> Bloc: Add GetWeatherEvent
+Bloc -> Usecase: execute(cityName)
+Usecase -> Repository: getWeather(cityName)
+Repository -> DataSource: getWeather(cityName)
+DataSource -> API: GET request
+API --> DataSource: JSON response
+DataSource --> Repository: WeatherModel
+Repository --> Usecase: Weather Entity
+Usecase --> Bloc: Either<Failure, Weather>
+Bloc -> Bloc: Emits WeatherLoaded or WeatherError state
+Bloc --> View: New State
+View -> View: Rebuilds UI with data or error
+View --> User: Displays weather information or error message
+@enduml
