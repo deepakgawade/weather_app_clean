@@ -1,0 +1,41 @@
+@startuml
+class Weather {
+  +String cityName
+  +double temperature
+  +String description
+  +String icon
+}
+
+class GetWeather {
+  +WeatherRepository repository
+  +execute(String cityName)
+}
+
+abstract class WeatherRepository {
+  +getWeather(String cityName)
+}
+
+class WeatherRepositoryImpl {
+  +RemoteDataSource remoteDataSource
+  +getWeather(String cityName)
+}
+
+abstract class RemoteDataSource {
+  +getWeather(String cityName)
+}
+
+class RemoteDataSourceImpl {
+  +http.Client client
+  +getWeather(String cityName)
+}
+
+class WeatherModel {
+  +fromJson()
+}
+
+Weather <|-- WeatherModel
+WeatherRepository <|.. WeatherRepositoryImpl
+RemoteDataSource <|.. RemoteDataSourceImpl
+GetWeather --> WeatherRepository
+WeatherRepositoryImpl --> RemoteDataSource
+@enduml
