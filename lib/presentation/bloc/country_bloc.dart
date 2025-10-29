@@ -16,17 +16,14 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
     on<CountryResetEvent>(reset);
   }
 
-  void getCountryInfo(CountrySearchEvent event,Emitter<CountryState> emit)async{
-emit(CountryLoadingState());
-  final result= await countryRepository.execute(event.country);
-
-if(result.isRight()){
-  emit(CountryLoadedState(county: result.getOrElse(() => const Country(name: "India", common: "India", currencies: "Rupees", capital: "Delhi", capitalLocation: "", countryLocation: "", borders: const [" "], area: 23445.455, population: 0, flags: const[""], coatOfArms: ""))));
-}else{
-  emit(CountryFailureState());
-}
-
-}
+  void getCountryInfo(CountrySearchEvent event, Emitter<CountryState> emit) async {
+    emit(CountryLoadingState());
+    final result = await countryRepository.execute(event.country);
+    result.fold(
+      (failure) => emit(CountryFailureState()),
+      (country) => emit(CountryLoadedState(county: country)),
+    );
+  }
 
   void reset(CountryResetEvent event, Emitter<CountryState> emit){
 emit(CountryInitialState());

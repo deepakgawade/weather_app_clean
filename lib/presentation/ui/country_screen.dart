@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_clean/presentation/bloc/bloc/second_bloc.dart';
 import 'package:weather_clean/presentation/bloc/country_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,14 +32,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Column(
         children: [
-          BlocProvider(
-            create: (context) => SecondBloc(),
-            child: BlocBuilder<SecondBloc, SecondState>(
-              builder: (context, state) {
-                return Text("");
-              },
-            ),
-          ),
           BlocBuilder<CountryBloc, CountryState>(
             bloc: countryBloc,
             builder: (context, state) {
